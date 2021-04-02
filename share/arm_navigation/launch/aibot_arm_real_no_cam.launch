@@ -1,0 +1,24 @@
+<launch>
+
+    <rosparam file="$(find arm_navigation)/config/controllers.yaml" command="load" />
+    
+    <node pkg="arm_navigation" type="aibot_arm_real_node" name="aibot_arm_real_node" output="screen"> 
+    </node>
+
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="/" args="
+            /aibot/controller/joint_state_controller
+            /aibot/controller/mycobot_controller
+            "/>
+
+    <include file="$(find aibot_car_arm_config)/launch/move_group.launch" >
+        <arg name="allow_trajectory_execution" value="true"/>
+        <arg name="fake_execution" value="false"/>
+        <arg name="info" value="true"/>
+        <param name="allowed_execution_duration_scaling" value="5"/>
+        <param name="allowed_goal_duration_margin" value="5"/>
+        <param name="execution_duration_monitoring" value="false"/>
+        <arg name="publish_monitored_planning_scene" value="true" />
+    </include>
+
+</launch>
+

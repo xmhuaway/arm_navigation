@@ -1,0 +1,41 @@
+aibot:
+  hardware_interface:
+     loop_hz: 10 # hz
+     joints:
+      - joint2_to_joint1
+      - joint3_to_joint2
+      - joint4_to_joint3
+      - joint5_to_joint4
+      - joint6_to_joint5
+      - joint6output_to_joint6
+  controller:
+    joint_state_controller:
+      type: joint_state_controller/JointStateController
+      publish_rate: 100
+    mycobot_controller:
+      type: "position_controllers/JointTrajectoryController"
+      joints:
+        - joint2_to_joint1
+        - joint3_to_joint2
+        - joint4_to_joint3
+        - joint5_to_joint4
+        - joint6_to_joint5
+        - joint6output_to_joint6
+      constraints:
+        goal_time: 0.5
+        stopped_velocity_tolerance: 0 # Override default
+        joint2_to_joint1:
+          goal: 0.02                     # Not enforced if unspecified
+        joint3_to_joint2:
+          goal: 0.02                     # Not enforced if unspecified
+        joint4_to_joint3:
+          goal: 0.02                     # Not enforced if unspecified
+        joint5_to_joint4:
+          goal: 0.02                     # Not enforced if unspecified
+        joint6_to_joint5:
+          goal: 0.02                     # Not enforced if unspecified
+        joint6output_to_joint6:
+          goal: 0.02                     # Not enforced if unspecified
+
+
+
